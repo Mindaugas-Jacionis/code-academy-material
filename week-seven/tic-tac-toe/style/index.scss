@@ -2,7 +2,13 @@
 @import 'reset';
 
 $red: #871805;
+$green: #0bb76c;
 $black: #010b1c;
+$white: #fff;
+
+* {
+  transition: all 0.3s linear;
+}
 
 body {
   height: 100vh;
@@ -18,6 +24,24 @@ body {
     display: flex;
     flex-direction: column;
     flex: 1;
+
+    .primary-button {
+      box-sizing: border-box;
+      padding: 10px 20px;
+      margin: 20px;
+      background: darken($green, 10%);
+      color: darken($white, 10%);
+      border: none;
+      border-radius: 5px;
+
+      font-size: 32px;
+      cursor: pointer;
+
+      &:hover {
+        background: $green;
+        color: $white;
+      }
+    }
 
     .row {
       border-bottom: 1px solid $black;
@@ -38,7 +62,7 @@ body {
         cursor: pointer;
 
         &:hover {
-          background: $red;
+          background: darken($white, 30%);
         }
 
         &:last-child {
