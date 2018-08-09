@@ -1,0 +1,45 @@
+// compileCompressed, compressedFilenamePattern: $1.css
+@import 'reset';
+
+$red: #871805;
+$black: #010b1c;
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  #app {
+    max-width: 320px;
+    max-height: 320px;
+    height: 100vh;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    .row {
+      border-bottom: 1px solid $black;
+      display: flex;
+      flex: 1;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .box {
+        flex: 1;
+        border-right: 1px solid $black;
+
+        &:hover {
+          background: $red;
+        }
+
+        &:last-child {
+          border-right: none;
+        }
+      }
+    }
+  }
+}
