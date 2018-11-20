@@ -1,78 +1,84 @@
-const output = document.querySelector('#output');
-const buttons = document.querySelectorAll('button');
+const actions = document.getElementById("actions");
+const output = document.getElementById("output");
 
-const clearOutput = () => (output.innerHTML = '');
-const setOutput = content => (output.innerHTML = content);
-
-function drawNinetyTriangle() {
-  clearOutput();
-  let result = '';
-
-  for (let i = 0; i < 8; i++) {
-    if (!!result) {
-      result = `${result}<br />`;
-    }
-    for (let j = 0; j < i; j++) {
-      result = `${result}*`;
-    }
-  }
-
-  setOutput(result);
-}
-
-function displayPyramid() {
-  const rows = 8;
-  let result = '';
-
-  clearOutput();
-
-  for (var i = 0; i <= rows; i++) {
-    for (var j = 0; j < rows - i; j++) {
-      result = `${result}&nbsp`;
-    }
-    for (var k = 0; k < 2 * i + 1; k++) {
-      result = `${result}*`;
-    }
-
-    result = `${result}<br>`;
-  }
-  setOutput(result);
-}
-
-function displayReversePyramid() {
-  const rows = 8;
-  let result = '';
-
-  clearOutput();
-
-  for (var i = rows; i >= 0; i--) {
-    for (var j = 0; j < rows - i; j++) {
-      result = `${result}&nbsp`;
-    }
-    for (var k = 0; k < 2 * i + 1; k++) {
-      result = `${result}*`;
-    }
-
-    result = `${result}<br>`;
-  }
-  setOutput(result);
-}
-
-const buttonClick = event => {
-  switch (event.target.id) {
-    case 'ninety-degrees':
-      drawNinetyTriangle();
-      break;
-    case 'pyramid':
-      displayPyramid();
-      break;
-    case 'reverse-pyramid':
-      displayReversePyramid();
-      break;
-    case 'clear':
-      clearOutput();
-      break;
-  }
+const render = drawing => {
+  output.innerHTML = drawing;
 };
 
-buttons.forEach(button => button.addEventListener('click', buttonClick));
+const triangle = () => {
+  let drawing = "";
+  for (let i = 0; i < 10; i++) {
+    for (let j = 0; j < i + 1; j++) {
+      drawing += "*";
+    }
+
+    drawing += "<br />";
+  }
+
+  render(drawing);
+};
+
+const piramid = () => {
+  let drawing = "";
+  for (let i = 0; i < 10; i++) {
+    for (let x = 0; x < 10 - i; x++) {
+      drawing += "&nbsp;";
+    }
+
+    for (let k = 0; k < i * 2 + 1; k++) {
+      drawing += "*";
+    }
+
+    // for (let k = 0; k < i; k++) {
+    //   drawing += "* ";
+    // }
+
+    drawing += "<br />";
+  }
+
+  render(drawing);
+};
+
+const reversePiramid = () => {
+  let drawing = "";
+  for (let i = 10; i >= 0; i--) {
+    for (let x = 0; x < 10 - i; x++) {
+      drawing += "&nbsp;";
+    }
+
+    for (let k = 0; k < i * 2 + 1; k++) {
+      drawing += "*";
+    }
+
+    // for (let k = 0; k < i; k++) {
+    //   drawing += "* ";
+    // }
+
+    drawing += "<br />";
+  }
+
+  render(drawing);
+};
+
+actions.addEventListener("click", event => {
+  if (event.target.tagName === "BUTTON") {
+    const action = event.target.name;
+
+    switch (action) {
+      case "triangle":
+        triangle();
+        break;
+      case "piramid":
+        piramid();
+        break;
+      case "reverse-piramid":
+        reversePiramid();
+        break;
+      case "clear":
+        render("");
+        break;
+      default:
+        render("");
+    }
+  }
+});
